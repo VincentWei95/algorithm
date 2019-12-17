@@ -15,10 +15,10 @@ package easy;
  * T:O(n) 最多会循环一个字符串长度
  * S:O(1)
  */
-public class Palindrome {
+public class PalindromeString {
 
     public static void main(String[] args) {
-        Palindrome palindrome = new Palindrome();
+        PalindromeString palindrome = new PalindromeString();
         System.out.println(palindrome.isPalindrome("race a car"));
     }
 
