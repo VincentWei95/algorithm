@@ -37,7 +37,7 @@ public class BinaryTreeSymmetry {
         root.rightNode.rightNode = new TreeNode(4);
 
         BinaryTreeSymmetry main = new BinaryTreeSymmetry();
-        System.out.println(main.isTreesymmetryStack(root));
+        System.out.println(main.isTreeSymmetryStack(root));
     }
 
     /**
@@ -69,10 +69,22 @@ public class BinaryTreeSymmetry {
      *
      * 根结点不需要对比，左节点和右节点入栈，如果栈不为空，弹栈对树节点进行对比
      *
+     * 第一次入栈：
+     *
+     * 2 根节点的右节点
+     * 2 根结点的左节点
+     *
+     * 第二次入栈：
+     *
+     * 8 右节点的左节点
+     * 8 左节点的右节点
+     * 4 右节点的右节点
+     * 4 左节点的左节点
+     *
      * T:O(n) 需要遍历整个二叉树
      * S:O(n) 需要一个栈
      */
-    private boolean isTreesymmetryStack(TreeNode root) {
+    private boolean isTreeSymmetryStack(TreeNode root) {
         if (root == null) return true;
 
         Stack<TreeNode> stack = new Stack<>();
