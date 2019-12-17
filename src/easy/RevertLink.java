@@ -16,10 +16,51 @@ package easy;
 public class RevertLink {
 
     public static void main(String[] args) {
+        RevertLink main = new RevertLink();
+        Link head = new Link(1);
+        Link second = new Link(2);
+        Link third = new Link(3);
+        Link fourth = new Link(4);
+        Link fifth = new Link(5);
+        head.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+        System.out.println(main.printLink(head));
+        System.out.println(main.printLink(main.revertLink(head)));
+    }
 
+    private String printLink(Link head) {
+        StringBuilder sb = new StringBuilder();
+        for (Link p = head; p != null; p = p.next) {
+            sb.append(p.val).append("->");
+        }
+        sb.append("null");
+        return sb.toString();
     }
 
     /**
+     * 初始：
+     * null -> 1 -> 2 -> 3 -> 4 -> 5 -> null
+     * pre    cur
+     *
+     * Link next = current.next;
+     *       next = 2
+     * null -> 1 -> 2 -> 3 -> 4 -> 5 -> null
+     * pre    cur
+     *
+     * current.next = previous;
+     * null <- 1  2 -> 3 -> 4 -> 5 -> null
+     * pre    cur
+     *
+     * previous = current;
+     * null <- 1  2 -> 3 -> 4 -> 5 -> null
+     *        pre
+     *
+     * current = next;
+     * null <- 1  2 -> 3 -> 4 -> 5 -> null
+     *        pre cur
+     *
      * T:O(n) 遍历一次链表
      * S:O(1)
      */
