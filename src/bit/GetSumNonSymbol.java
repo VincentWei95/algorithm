@@ -1,4 +1,4 @@
-package easy;
+package bit;
 
 /**
  * 不用+/-求两数之和：

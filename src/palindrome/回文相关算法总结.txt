@@ -1,0 +1,22 @@
+回文相关的算法主要使用双指针的方式：左边指针递增右边指针递减往中间靠拢的实现方式
+
+双指针算法模板：
+
+function foo() {
+    // /第一步：判断输入或者状态是否非法（完整性检查）
+    if (input/state is invalid) {
+        return;
+    }
+
+    // 第二步：定义两个指针，一个左指针，一个右指针，循环判断是否符合要求
+    int left = 0;
+    int right = length - 1;
+    for (; left < right; left++, right--) {
+        if (match condition) {
+            left++ or right--;
+        }
+    }
+
+    // 第三步：符合条件返回结果
+    return true or false;
+}

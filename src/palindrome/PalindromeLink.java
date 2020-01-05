@@ -1,4 +1,4 @@
-package easy;
+package palindrome;
 
 import java.util.Stack;
 

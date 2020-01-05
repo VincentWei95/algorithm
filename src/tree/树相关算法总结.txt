@@ -1,0 +1,26 @@
+二叉树相关的算法主要使用两种方式：
+
+①递归
+②使用栈，不断对左右节点入栈出栈对比
+
+递归算法模板：
+
+function foo(n) {
+    // /第一步：判断输入或者状态是否非法（完整性检查）
+    if (input/state is invalid) {
+        return;
+    }
+
+    // 第二步：判断递归是否应当结束
+    if (match condition) {
+        return some value;
+    }
+
+    // 第三步：缩小问题规模
+    result1 = foo(n1)
+    result2 = foo(n2)
+    ...
+
+    // 第四步：整合结果
+    return combine(result1, result2)
+}

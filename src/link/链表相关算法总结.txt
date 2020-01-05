@@ -1,0 +1,21 @@
+链表相关的算法主要使用快慢指针的方式（三个指针）：一个prev指针，一个curr指针，一个next指针
+
+以反转链表举例算法模板：
+
+function foo() {
+    prev = null;
+    curr = head;
+    n = k;
+
+    while (curr && n-- > 0) {
+        // 将curr指向的下一节点使用next指针临时保存起来
+        next = curr.next;
+
+        // curr指针指向prev指针
+        curr.next = prev;
+
+        // prev和curr指针同时前进到下个节点（prev指向curr，curr指向next）
+        prev = curr;
+        curr = next;
+    }
+}

@@ -1,4 +1,4 @@
-package easy;
+package palindrome;
 
 /**
  * 回文数字：

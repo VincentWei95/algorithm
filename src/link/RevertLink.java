@@ -1,4 +1,4 @@
-package easy;
+package link;
 
 /**
  * 反转单链表：

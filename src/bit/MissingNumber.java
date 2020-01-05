@@ -1,4 +1,4 @@
-package easy;
+package bit;
 
 /**
  * 缺失的数字：

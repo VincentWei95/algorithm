@@ -1,4 +1,4 @@
-package easy;
+package tree;
 
 import java.util.Stack;
 

@@ -1,4 +1,4 @@
-package easy;
+package sum;
 
 /**
  * 有序数组中求和为给定值的两个数组：

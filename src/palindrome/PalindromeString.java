@@ -1,4 +1,4 @@
-package easy;
+package palindrome;
 
 /**
  * 回文字符串：只考虑字母和数字，左边和右边字符往中间靠拢对比都是相同的，则认为是回文字符串
