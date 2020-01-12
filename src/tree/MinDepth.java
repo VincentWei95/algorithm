@@ -78,14 +78,4 @@ public class MinDepth {
 
         return -1;
     }
-
-    private static class TreeNode {
-        int val;
-        TreeNode leftNode;
-        TreeNode rightNode;
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-    }
 }

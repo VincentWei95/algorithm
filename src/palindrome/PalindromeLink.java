@@ -1,5 +1,7 @@
 package palindrome;
 
+import link.Link;
+
 import java.util.Stack;
 
 /**
@@ -113,14 +115,5 @@ public class PalindromeLink {
             if (pre.val != cur.val) return false;
         }
         return true;
-    }
-
-    private static class Link {
-        int val;
-        Link next;
-
-        Link(int val) {
-            this.val = val;
-        }
     }
 }

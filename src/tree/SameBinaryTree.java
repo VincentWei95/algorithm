@@ -114,14 +114,4 @@ public class SameBinaryTree {
         }
         return true;
     }
-
-    private static class TreeNode {
-        int val;
-        TreeNode leftNode;
-        TreeNode rightNode;
-
-        TreeNode(int val) {
-            this.val = val;
-        }
-    }
 }

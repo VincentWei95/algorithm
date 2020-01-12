@@ -75,13 +75,4 @@ public class RevertLink {
         }
         return previous;
     }
-
-    private static class Link {
-        int val;
-        Link next;
-
-        Link(int val) {
-            this.val = val;
-        }
-    }
 }
