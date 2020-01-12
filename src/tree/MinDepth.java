@@ -38,7 +38,7 @@ public class MinDepth {
         root.rightNode.rightNode = new TreeNode(16);
 
         MinDepth main = new MinDepth();
-        System.out.println(main.minDepthIteractive(root));
+        System.out.println(main.minDepthIterative(root));
     }
 
     /**
@@ -59,7 +59,7 @@ public class MinDepth {
      *
      * T:O(n) S:O(n)
      */
-    private int minDepthIteractive(TreeNode root) {
+    private int minDepthIterative(TreeNode root) {
         if (root == null) return 0;
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
