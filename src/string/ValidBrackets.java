@@ -29,7 +29,7 @@ import java.util.Stack;
 public class ValidBrackets {
 
     public static void main(String[] args) {
-        String brackets = "([)]";
+        String brackets = "()[]{}";
 
         ValidBrackets main = new ValidBrackets();
         System.out.println(main.isValidBrackets(brackets));
