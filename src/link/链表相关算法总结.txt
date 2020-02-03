@@ -1,4 +1,6 @@
-链表相关的算法主要使用快慢指针的方式（三个指针）：一个prev指针，一个curr指针，一个next指针
+1、快慢指针解决链表相关算法
+
+一个prev指针，一个curr指针
 
 以反转链表举例算法模板：
 
@@ -19,3 +21,14 @@ function foo() {
         curr = next;
     }
 }
+
+以反转链表为例：
+
+prev -> curr -> next
+
+先拿出curr.next是因为下一个curr.next的指向要指向上一个prev
+然后prev和curr依次往前走一步
+
+2、借助空链表头dummyHead，dummyHead.next一般会作为结果返回，一般还需要在定义一个指针p=dummyHead实际处理逻辑
+
+3、判断链表相交、是否有环的算法，也是提供快慢指针quick和slow，quick走两步，slow走一步
