@@ -88,6 +88,7 @@ public class LevelOrderTraversalFromBottom {
         }
 
         // 存储出队节点头尾对调
+        // i和j分别指向列表头尾的指针，向中间靠拢交换
         for (int i = 0; i < result.size() / 2; i++) {
             int j = result.size() - 1 - i;
             List<Integer> tmp = result.get(j);
