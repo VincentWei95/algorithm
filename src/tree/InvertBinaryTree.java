@@ -42,11 +42,11 @@ public class InvertBinaryTree {
      */
     private TreeNode invertBinaryTreeRecursive(TreeNode root) {
         if (root == null) return root;
-        TreeNode tmp = root.leftNode;
-        root.leftNode = root.rightNode;
-        root.rightNode = tmp;
-        invertBinaryTreeRecursive(root.leftNode);
-        invertBinaryTreeRecursive(root.rightNode);
+        TreeNode tmp = root.left;
+        root.left = root.right;
+        root.right = tmp;
+        invertBinaryTreeRecursive(root.left);
+        invertBinaryTreeRecursive(root.right);
         return root;
     }
 
@@ -63,11 +63,11 @@ public class InvertBinaryTree {
 
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
-            TreeNode tmp = node.leftNode;
-            node.leftNode = node.rightNode;
-            node.rightNode = tmp;
-            if (node.leftNode != null) queue.add(node.leftNode);
-            if (node.rightNode != null) queue.add(node.rightNode);
+            TreeNode tmp = node.left;
+            node.left = node.right;
+            node.right = tmp;
+            if (node.left != null) queue.add(node.left);
+            if (node.right != null) queue.add(node.right);
         }
         return root;
     }

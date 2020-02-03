@@ -22,10 +22,10 @@ public class MaxDepth {
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
-        root.leftNode = new TreeNode(2);
-        root.rightNode = new TreeNode(4);
-        root.rightNode.leftNode = new TreeNode(8);
-        root.rightNode.rightNode = new TreeNode(16);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(4);
+        root.right.left = new TreeNode(8);
+        root.right.right = new TreeNode(16);
 
         MaxDepth main = new MaxDepth();
         System.out.println(main.maxDepthIterative(root));
@@ -38,10 +38,10 @@ public class MaxDepth {
      */
     private int maxDepthRecursive(TreeNode root) {
         if (root == null) return 0;
-        if (root.leftNode == null && root.rightNode == null) return 1; // 只有根节点
-        if (root.leftNode == null) return maxDepthRecursive(root.rightNode) + 1; // 如果没有左节点，遍历右节点，1为根节点
-        if (root.rightNode == null) return maxDepthRecursive(root.leftNode) + 1; // 如果没有右节点，遍历左节点，1为根节点
-        return Math.max(maxDepthRecursive(root.leftNode), maxDepthRecursive(root.rightNode)) + 1; // 如果左右节点都存在，各自遍历左右节点取最大深度，1为根节点
+        if (root.left == null && root.right == null) return 1; // 只有根节点
+        if (root.left == null) return maxDepthRecursive(root.right) + 1; // 如果没有左节点，遍历右节点，1为根节点
+        if (root.right == null) return maxDepthRecursive(root.left) + 1; // 如果没有右节点，遍历左节点，1为根节点
+        return Math.max(maxDepthRecursive(root.left), maxDepthRecursive(root.right)) + 1; // 如果左右节点都存在，各自遍历左右节点取最大深度，1为根节点
     }
 
     /**
@@ -59,8 +59,8 @@ public class MaxDepth {
             int size = queue.size();
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
-                if (node.leftNode != null) queue.add(node.leftNode);
-                if (node.rightNode != null) queue.add(node.rightNode);
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
             }
             ++depth;
         }

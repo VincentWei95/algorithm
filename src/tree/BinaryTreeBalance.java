@@ -41,14 +41,14 @@ public class BinaryTreeBalance {
      */
     private boolean isTreeBalanceTopDown(TreeNode root) {
         if (root == null) return true;
-        return Math.abs(getHeight(root.leftNode)- getHeight(root.rightNode)) <= 1 &&
-                isTreeBalanceTopDown(root.leftNode) && isTreeBalanceTopDown(root.rightNode);
+        return Math.abs(getHeight(root.left)- getHeight(root.right)) <= 1 &&
+                isTreeBalanceTopDown(root.left) && isTreeBalanceTopDown(root.right);
     }
 
     private int getHeight(TreeNode root) {
         if (root == null) return 0;
-        int left = getHeight(root.leftNode);
-        int right = getHeight(root.rightNode);
+        int left = getHeight(root.left);
+        int right = getHeight(root.right);
         return Math.max(left, right) + 1;
     }
 
@@ -65,10 +65,10 @@ public class BinaryTreeBalance {
     private int getHeightAndCheck(TreeNode root) {
         if (root == null) return 0;
 
-        int left = getHeightAndCheck(root.leftNode);
+        int left = getHeightAndCheck(root.left);
         if (left == -1) return -1;
 
-        int right = getHeightAndCheck(root.rightNode);
+        int right = getHeightAndCheck(root.right);
         if (right == -1) return -1;
 
         if (Math.abs(left - right) > 1) return -1;

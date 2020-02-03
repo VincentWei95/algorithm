@@ -40,22 +40,22 @@ public class SameBinaryTree {
 
     private TreeNode getFirstTree() {
         TreeNode root = new TreeNode(1);
-        root.leftNode = new TreeNode(2);
-        root.rightNode = new TreeNode(2);
-        root.leftNode.leftNode = new TreeNode(4);
-        root.leftNode.rightNode = new TreeNode(8);
-        root.rightNode.leftNode = new TreeNode(8);
-        root.rightNode.rightNode = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(2);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(8);
+        root.right.left = new TreeNode(8);
+        root.right.right = new TreeNode(4);
         return root;
     }
 
     private TreeNode getSecondTree() {
         TreeNode root = new TreeNode(1);
-        root.leftNode = new TreeNode(2);
-        root.rightNode = new TreeNode(2);
-        root.leftNode.leftNode = new TreeNode(4);
-        root.leftNode.rightNode = new TreeNode(8);
-        root.rightNode.leftNode = new TreeNode(8);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(2);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(8);
+        root.right.left = new TreeNode(8);
         return root;
     }
 
@@ -71,8 +71,8 @@ public class SameBinaryTree {
         if (p == null && q == null) return true;
         if (p == null || q == null) return false;
         return p.val == q.val
-                && isSameBinaryTreeRecursive(p.leftNode, q.leftNode)
-                && isSameBinaryTreeRecursive(p.rightNode, p.rightNode);
+                && isSameBinaryTreeRecursive(p.left, q.left)
+                && isSameBinaryTreeRecursive(p.right, p.right);
     }
 
     /**
@@ -107,10 +107,10 @@ public class SameBinaryTree {
             if (s == null || t == null) return false; // 如果有一边节点为null肯定不相同
             if (s.val != t.val) return false; // 两边节点的值不相同也不相同
 
-            stack.push(s.leftNode);
-            stack.push(t.leftNode);
-            stack.push(s.rightNode);
-            stack.push(t.rightNode);
+            stack.push(s.left);
+            stack.push(t.left);
+            stack.push(s.right);
+            stack.push(t.right);
         }
         return true;
     }

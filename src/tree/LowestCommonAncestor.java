@@ -56,9 +56,9 @@ public class LowestCommonAncestor {
         int qVal = q.val;
 
         if (pVal > parentVal && qVal > parentVal) {
-            return lowestCommonAncestorRecursive(root.rightNode, p, q);
+            return lowestCommonAncestorRecursive(root.right, p, q);
         } else if (pVal < parentVal && qVal < parentVal) {
-            return lowestCommonAncestorRecursive(root.leftNode, p, q);
+            return lowestCommonAncestorRecursive(root.left, p, q);
         } else {
             return root;
         }
@@ -79,9 +79,9 @@ public class LowestCommonAncestor {
             int parentVal = node.val;
 
             if (pVal > parentVal && qVal > parentVal) {
-                node = node.rightNode;
+                node = node.right;
             } else if (pVal < parentVal && qVal < parentVal) {
-                node = node.leftNode;
+                node = node.left;
             } else {
                 return node;
             }

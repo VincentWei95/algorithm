@@ -81,8 +81,8 @@ public class LevelOrderTraversalFromBottom {
                 TreeNode node = queue.poll();
                 elements.add(node.val);
                 // 如果出队节点有左右节点，则入队
-                if (node.leftNode != null) queue.add(node.leftNode);
-                if (node.rightNode != null) queue.add(node.rightNode);
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
             }
             result.add(elements);
         }

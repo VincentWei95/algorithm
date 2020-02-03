@@ -29,12 +29,12 @@ public class BinaryTreeSymmetry {
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
-        root.leftNode = new TreeNode(2);
-        root.rightNode = new TreeNode(2);
-        root.leftNode.leftNode = new TreeNode(4);
-        root.leftNode.rightNode = new TreeNode(8);
-        root.rightNode.leftNode = new TreeNode(8);
-        root.rightNode.rightNode = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(2);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(8);
+        root.right.left = new TreeNode(8);
+        root.right.right = new TreeNode(4);
 
         BinaryTreeSymmetry main = new BinaryTreeSymmetry();
         System.out.println(main.isTreeSymmetryStack(root));
@@ -52,14 +52,14 @@ public class BinaryTreeSymmetry {
      */
     private boolean isTreeSymmetryRecursive(TreeNode root) {
         if (root == null) return true;
-        return isTreeSymmetry(root.leftNode, root.rightNode);
+        return isTreeSymmetry(root.left, root.right);
     }
 
     private boolean isTreeSymmetry(TreeNode s, TreeNode t) {
         if (s != null && t != null) {
             return s.val == t.val
-                    && isTreeSymmetry(s.leftNode, t.rightNode) // 左节点的左节点不断与右节点的右节点对比
-                    && isTreeSymmetry(s.rightNode, t.leftNode); // 左节点的右节点不断与右节点的左节点对比
+                    && isTreeSymmetry(s.left, t.right) // 左节点的左节点不断与右节点的右节点对比
+                    && isTreeSymmetry(s.right, t.left); // 左节点的右节点不断与右节点的左节点对比
         }
         return s == null && t == null; // 到最后都为null说明是对称的
     }
@@ -88,8 +88,8 @@ public class BinaryTreeSymmetry {
         if (root == null) return true;
 
         Stack<TreeNode> stack = new Stack<>();
-        stack.push(root.leftNode);
-        stack.push(root.rightNode);
+        stack.push(root.left);
+        stack.push(root.right);
         while (!stack.isEmpty()) {
             TreeNode s = stack.pop();
             TreeNode t = stack.pop();
@@ -99,10 +99,10 @@ public class BinaryTreeSymmetry {
 
             // 左节点的左节点和右节点的右节点依次入栈
             // 左节点的右节点和右节点的左节点依次入栈
-            stack.push(s.leftNode);
-            stack.push(t.rightNode);
-            stack.push(s.rightNode);
-            stack.push(t.leftNode);
+            stack.push(s.left);
+            stack.push(t.right);
+            stack.push(s.right);
+            stack.push(t.left);
         }
         return true;
     }
