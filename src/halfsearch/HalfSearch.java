@@ -41,4 +41,41 @@ public class HalfSearch {
 
         return -1;
     }
+
+    private int halfSearch2(int[] arr, int data) {
+        int min = 0;
+        int max = arr.length - 1;
+        int mid = min + (max - min) / 2;
+
+        while (arr[mid] != data) {
+            if (arr[mid] > data) {
+                max = mid - 1;
+            } else if (arr[mid] < data) {
+                min = mid + 1;
+            }
+
+            if (min > max)
+                return -1;
+
+            mid = min + (max - min) / 2;
+        }
+        return mid;
+    }
+
+    // 递归二分法搜索，时间复杂度：O(logn)
+    private int halfSearch3(int[] arr, int min, int max, int target) {
+        if (min > max) return -1;
+
+        int mid = min + (max - min) / 2;
+
+        if (arr[mid] == target) {
+            return mid;
+        } else {
+            if (target > arr[mid]) {
+                return halfSearch3(arr, mid + 1, max, target);
+            } else {
+                return halfSearch3(arr, min, mid - 1, target);
+            }
+        }
+    }
 }
