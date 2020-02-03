@@ -18,18 +18,18 @@ package link;
 public class MergeTwoSortLink {
 
     public static void main(String[] args) {
-        Link link1 = new Link(1);
-        link1.next = new Link(3);
-        Link link2 = new Link(2);
-        link2.next = new Link(4);
-        link2.next.next = new Link(6);
+        ListNode link1 = new ListNode(1);
+        link1.next = new ListNode(3);
+        ListNode link2 = new ListNode(2);
+        link2.next = new ListNode(4);
+        link2.next.next = new ListNode(6);
 
         MergeTwoSortLink main = new MergeTwoSortLink();
-        Link mergeLink = main.mergeTwoSortLink(link1, link2);
+        ListNode mergeLink = main.mergeTwoSortLink(link1, link2);
         System.out.println(main.printLink(mergeLink));
     }
 
-    private String printLink(Link link) {
+    private String printLink(ListNode link) {
         StringBuilder sb = new StringBuilder();
         while (true) {
             sb.append(link.val);
@@ -44,8 +44,8 @@ public class MergeTwoSortLink {
      * T:O(m+n)
      * S:O(1)
      */
-    private Link mergeTwoSortLink(Link link1, Link link2) {
-        Link dummy = new Link(0), p = dummy; // 空链表头
+    private ListNode mergeTwoSortLink(ListNode link1, ListNode link2) {
+        ListNode dummy = new ListNode(0), p = dummy; // 空链表头
 
         while (link1 != null && link2 != null) {
             // 循环两个链表位置的值，链表头指向对应链表，链表位置往后移动

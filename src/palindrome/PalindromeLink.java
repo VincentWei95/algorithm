@@ -1,6 +1,6 @@
 package palindrome;
 
-import link.Link;
+import link.ListNode;
 
 import java.util.Stack;
 
@@ -25,10 +25,10 @@ public class PalindromeLink {
 
     public static void main(String[] args) {
         PalindromeLink main = new PalindromeLink();
-        Link head = new Link(4);
-        Link second = new Link(2);
-        Link third = new Link(2);
-        Link fourth = new Link(4);
+        ListNode head = new ListNode(4);
+        ListNode second = new ListNode(2);
+        ListNode third = new ListNode(2);
+        ListNode fourth = new ListNode(4);
         head.next = second;
         second.next = third;
         third.next = fourth;
@@ -41,9 +41,9 @@ public class PalindromeLink {
      * T:O(n)
      * S:O(n) 需要使用StringBuilder
      */
-    private boolean isPalindromeLinkStr(Link head) {
+    private boolean isPalindromeLinkStr(ListNode head) {
         StringBuilder sb = new StringBuilder();
-        Link current = head;
+        ListNode current = head;
         while (current != null) {
             sb.append(current.val);
             current = current.next;
@@ -65,13 +65,13 @@ public class PalindromeLink {
      * T:O(n)
      * S:O(n) 需要使用栈
      */
-    private boolean isPalindromeLinkStack(Link head) {
+    private boolean isPalindromeLinkStack(ListNode head) {
         Stack<Integer> stack = new Stack<>();
-        for (Link p = head; p != null; p = p.next) {
+        for (ListNode p = head; p != null; p = p.next) {
             stack.push(p.val);
         }
 
-        for (Link p = head; p != null; p = p.next) {
+        for (ListNode p = head; p != null; p = p.next) {
             if (p.val != stack.pop()) return false;
         }
         return true;
@@ -91,18 +91,18 @@ public class PalindromeLink {
      * T:O(n)
      * S:O(1)
      */
-    private boolean isPalindromeLinkRevert(Link head) {
+    private boolean isPalindromeLinkRevert(ListNode head) {
         // 计算链表节点个数
         int len = 0;
-        for (Link p = head; p != null; p = p.next) {
+        for (ListNode p = head; p != null; p = p.next) {
             ++len;
         }
 
         // 反转一半链表
-        Link cur = head;
-        Link pre = null;
+        ListNode cur = head;
+        ListNode pre = null;
         for (int i = 0; i < len / 2; i++) {
-            Link next = cur.next;
+            ListNode next = cur.next;
             cur.next = pre;
             pre = cur;
             cur = next;

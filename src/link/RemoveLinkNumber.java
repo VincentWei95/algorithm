@@ -44,10 +44,10 @@ public class RemoveLinkNumber {
      * T:O(n)
      * S:O(1)
      */
-    private Link removeNumber(Link head, int num) {
-        Link dummy = new Link(0);
+    private ListNode removeNumber(ListNode head, int num) {
+        ListNode dummy = new ListNode(0);
         dummy.next = head;
-        Link p = dummy;
+        ListNode p = dummy;
 
         while (p.next != null) {
             if (p.next.val == num) {

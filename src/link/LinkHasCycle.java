@@ -22,10 +22,10 @@ import java.util.Set;
 public class LinkHasCycle {
 
     public static void main(String[] args) {
-        Link link = new Link(1);
-        link.next = new Link(2);
-        link.next.next = new Link(4);
-        link.next.next.next = new Link(8);
+        ListNode link = new ListNode(1);
+        link.next = new ListNode(2);
+        link.next.next = new ListNode(4);
+        link.next.next.next = new ListNode(8);
         link.next.next.next.next = link.next.next;
 
         LinkHasCycle main = new LinkHasCycle();
@@ -38,9 +38,9 @@ public class LinkHasCycle {
      * T:O(n)
      * S:O(n)
      */
-    private boolean hasCycleHashSet(Link link) {
-        Set<Link> set = new HashSet<>();
-        for (Link p = link; p != null; p = p.next) {
+    private boolean hasCycleHashSet(ListNode link) {
+        Set<ListNode> set = new HashSet<>();
+        for (ListNode p = link; p != null; p = p.next) {
             if (set.contains(p)) return true;
             set.add(p);
         }
@@ -56,9 +56,9 @@ public class LinkHasCycle {
      * T:O(n)
      * S:O(1)
      */
-    private boolean hasCyclePointer(Link link) {
-        Link f = link;
-        Link s = link;
+    private boolean hasCyclePointer(ListNode link) {
+        ListNode f = link;
+        ListNode s = link;
         while (f != null && f.next != null) {
             f = f.next.next; // 快指针走两步
             s = s.next; // 慢指针走一步

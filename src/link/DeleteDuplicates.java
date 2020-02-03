@@ -17,11 +17,11 @@ import java.util.Set;
 public class DeleteDuplicates {
 
     public static void main(String[] args) {
-        Link head = new Link(1);
-        head.next = new Link(1);
-        head.next.next = new Link(2);
-        head.next.next.next = new Link(3);
-        head.next.next.next.next = new Link(3);
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(1);
+        head.next.next = new ListNode(2);
+        head.next.next.next = new ListNode(3);
+        head.next.next.next.next = new ListNode(3);
 
         DeleteDuplicates main = new DeleteDuplicates();
         System.out.println(main.deleteDuplicates(head));
@@ -33,8 +33,8 @@ public class DeleteDuplicates {
      * T:O(n)
      * S:O(1)
      */
-    private Link deleteDuplicates(Link head) {
-        Link current = head;
+    private ListNode deleteDuplicates(ListNode head) {
+        ListNode current = head;
         while (current != null && current.next != null) {
             if (current.next.val == current.val) {
                 current.next = current.next.next;
@@ -50,7 +50,7 @@ public class DeleteDuplicates {
      *
      * 首次遍历筛选存储不重复的链表节点，二次循环重新构建一个新链表
      */
-    private Link deleteDuplicatesSet(Link head) {
+    private ListNode deleteDuplicatesSet(ListNode head) {
         Set<Integer> set = new HashSet<>();
         while (head != null) {
             if (!set.contains(head.val)) {
@@ -59,10 +59,10 @@ public class DeleteDuplicates {
             head = head.next;
         }
 
-        Link dummyHead = new Link(0);
-        Link p = dummyHead;
+        ListNode dummyHead = new ListNode(0);
+        ListNode p = dummyHead;
         for (Integer val : set) {
-            Link newLink = new Link(val);
+            ListNode newLink = new ListNode(val);
             p.next = newLink;
             p = p.next;
         }

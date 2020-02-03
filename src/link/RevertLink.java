@@ -17,11 +17,11 @@ public class RevertLink {
 
     public static void main(String[] args) {
         RevertLink main = new RevertLink();
-        Link head = new Link(1);
-        Link second = new Link(2);
-        Link third = new Link(3);
-        Link fourth = new Link(4);
-        Link fifth = new Link(5);
+        ListNode head = new ListNode(1);
+        ListNode second = new ListNode(2);
+        ListNode third = new ListNode(3);
+        ListNode fourth = new ListNode(4);
+        ListNode fifth = new ListNode(5);
         head.next = second;
         second.next = third;
         third.next = fourth;
@@ -30,9 +30,9 @@ public class RevertLink {
         System.out.println(main.printLink(main.revertLink(head)));
     }
 
-    private String printLink(Link head) {
+    private String printLink(ListNode head) {
         StringBuilder sb = new StringBuilder();
-        for (Link p = head; p != null; p = p.next) {
+        for (ListNode p = head; p != null; p = p.next) {
             sb.append(p.val).append("->");
         }
         sb.append("null");
@@ -64,11 +64,11 @@ public class RevertLink {
      * T:O(n) 遍历一次链表
      * S:O(1)
      */
-    private Link revertLink(Link head) {
-        Link current = head;
-        Link previous = null;
+    private ListNode revertLink(ListNode head) {
+        ListNode current = head;
+        ListNode previous = null;
         while (current != null) {
-            Link next = current.next; // 把当前指向的位置先拿出来
+            ListNode next = current.next; // 把当前指向的位置先拿出来
             current.next = previous; // 当前的下一个指向上一个
             previous = current; // 上一个变成了当前
             current = next; // 当前就是刚把指向的位置拿出来的link

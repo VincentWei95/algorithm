@@ -25,7 +25,7 @@ public class DeleteNode {
 
     }
 
-    private void deleteNode(Link node) {
+    private void deleteNode(ListNode node) {
         node.val = node.next.val;
         node.next = node.next.next;
     }

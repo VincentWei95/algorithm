@@ -19,14 +19,14 @@ package link;
 public class IntersectionNode {
 
     public static void main(String[] args) {
-        Link link1 = new Link(1);
-        link1.next = new Link(2);
-        link1.next.next = new Link(6);
-        link1.next.next.next = new Link(7);
+        ListNode link1 = new ListNode(1);
+        link1.next = new ListNode(2);
+        link1.next.next = new ListNode(6);
+        link1.next.next.next = new ListNode(7);
 
-        Link link2 = new Link(3);
-        link2.next = new Link(4);
-        link2.next.next = new Link(5);
+        ListNode link2 = new ListNode(3);
+        link2.next = new ListNode(4);
+        link2.next.next = new ListNode(5);
         link2.next.next.next = link1.next.next;
         link2.next.next.next.next = link1.next.next.next;
 
@@ -50,19 +50,19 @@ public class IntersectionNode {
      * T:O(m+n)
      * S:O(1)
      */
-    private Link getIntersectionNodeWithLen(Link headA, Link headB) {
+    private ListNode getIntersectionNodeWithLen(ListNode headA, ListNode headB) {
         // 先获取两个链表长度
         int lenA = 0;
         int lenB = 0;
-        for (Link p = headA; p != null; p = p.next) {
+        for (ListNode p = headA; p != null; p = p.next) {
             lenA++;
         }
-        for (Link q = headB; q != null; q = q.next) {
+        for (ListNode q = headB; q != null; q = q.next) {
             lenB++;
         }
 
-        Link p = headA;
-        Link q = headB;
+        ListNode p = headA;
+        ListNode q = headB;
         // 对比链表长度差让长的链表先移动
         if (lenA > lenB) {
             for (int i = 0; i < lenA - lenB; i++) {
@@ -94,10 +94,10 @@ public class IntersectionNode {
      * T:O(m+n)
      * S:O(1)
      */
-    private Link getIntersectionNodeWithoutLen(Link headA, Link headB) {
+    private ListNode getIntersectionNodeWithoutLen(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) return null;
-        Link p = headA;
-        Link q = headB;
+        ListNode p = headA;
+        ListNode q = headB;
         while (p != q) {
             // 链表走到头，切换到其他链表
             p = p == null ? headB : p.next;
