@@ -1,4 +1,6 @@
-package tree;
+package tree.middle;
+
+import tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
