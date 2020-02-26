@@ -1,5 +1,7 @@
 package tree;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -78,5 +80,99 @@ public class HasPathSum {
         }
 
         return false;
+    }
+
+    /**
+     * 扩展1：
+     *
+     * 给定一个二叉树和一个目标和，找到所有从根节点到叶子节点路径总和等于给定目标和的路径
+     *
+     * 给定如下二叉树，以及目标和 sum = 22
+     *
+     *               5
+     *              / \
+     *             4   8
+     *            /   / \
+     *           11  13  4
+     *          /  \    / \
+     *         7    2  5   1
+     *
+     *  [
+     *    [5,4,11,2],
+     *    [5,8,4,5]
+     * ]
+     *
+     * dfs遍历，遍历每个节点都存进临时列表nodeList，直到叶子节点判断sum是否为0，有则说明是一条符合路径添加到result列表，
+     * 不是则继续遍历，nodeList将刚添加的节点移除
+     *
+     * T:O(n)
+     * S:O(n)
+     */
+    private List<List<Integer>> result = new ArrayList<>();
+    private List<Integer> nodeList = new ArrayList<>();
+    private List<List<Integer>> pathSum1(TreeNode root, int sum) {
+        if (root == null) return result;
+
+        sum -= root.val;
+        nodeList.add(root.val);
+        if (root.left == null && root.right == null) {
+            if (sum == 0) {
+                result.add(new ArrayList<>(nodeList));
+            }
+        }
+        pathSum1(root.left, sum);
+        pathSum1(root.right, sum);
+        nodeList.remove(nodeList.size() - 1);
+        return result;
+    }
+
+    /**
+     * 扩展2：
+     *
+     * 给定一个二叉树，它的每个结点都存放着一个整数值。
+     *
+     * 找出路径和等于给定数值的路径总数。
+     *
+     * 路径不需要从根节点开始，也不需要在叶子节点结束，但是路径方向必须是向下的（只能从父节点到子节点）。
+     *
+     * 二叉树不超过1000个节点，且节点数值范围是 [-1000000,1000000] 的整数
+     *
+     * root = [10,5,-3,3,2,null,11,3,-2,null,1], sum = 8
+     *
+     *       10
+     *      /  \
+     *     5   -3
+     *    / \    \
+     *   3   2   11
+     *  / \   \
+     * 3  -2   1
+     *
+     * 返回 3。和等于 8 的路径有:
+     *
+     * 1.  5 -> 3
+     * 2.  5 -> 2 -> 1
+     * 3.  -3 -> 11
+     *
+     * T:O(n)
+     * S:O(n)
+     */
+    private int pathSize;
+    private int pathSum2(TreeNode root, int sum) {
+        if (root == null) return 0;
+        helper(root.left, sum);
+        helper(root.right, sum);
+        return pathSize;
+    }
+
+    private void helper(TreeNode root, int sum) {
+        if (root == null) return;
+
+        sum -= root.val;
+        if (sum == 0) {
+            pathSize++;
+        } else {
+            helper(root.left, sum);
+            helper(root.right, sum);
+        }
     }
 }
