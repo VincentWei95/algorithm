@@ -19,7 +19,7 @@ public class SumOfLeftLeaves {
 
     }
 
-    private int sumOfLeftLeaves(TreeNode root) {
+    private int sumOfLeftLeaves1(TreeNode root) {
         return sumLeftLeaves(root, false);
     }
 
@@ -35,6 +35,23 @@ public class SumOfLeftLeaves {
         int left = sumLeftLeaves(node.left, true);
         int right = sumLeftLeaves(node.right, false);
         return leaves + left + right;
+    }
+
+    // 个人实现
+    private int result;
+    private int sumOfLeftLeaves2(TreeNode root) {
+        recursion(root, false);
+        return result;
+    }
+
+    private void recursion(TreeNode node, boolean isLeft) {
+        if (node == null) return;
+        // 如果是叶子节点并且是左节点，说明是左叶子节点
+        if (node.left == null && node.right == null && isLeft) {
+            result += node.val;
+        }
+        recursion(node.left, true);
+        recursion(node.right, false);
     }
 
     // 扩展：获取所有节点的和
