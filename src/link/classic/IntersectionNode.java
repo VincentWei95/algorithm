@@ -1,4 +1,6 @@
-package link;
+package link.classic;
+
+import link.ListNode;
 
 /**
  * 链表的相交节点：

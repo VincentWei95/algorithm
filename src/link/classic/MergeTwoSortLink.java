@@ -1,4 +1,6 @@
-package link;
+package link.classic;
+
+import link.ListNode;
 
 /**
  * 合并两个有序链表：
@@ -14,6 +16,16 @@ package link;
  * 合并后的链表就是：
  *
  * 1 -> 2 -> 3 -> 4 -> 6
+ *
+ * 或者：
+ *
+ * L1：1 -> 2 -> 4
+ *
+ * L2：1 -> 3 -> 4
+ *
+ * 合并后的链表就是：
+ *
+ * 1 -> 1 -> 2 -> 3 -> 4 -> 4
  */
 public class MergeTwoSortLink {
 
@@ -41,6 +53,8 @@ public class MergeTwoSortLink {
     }
 
     /**
+     * 先循环两个链表，对比两个链表各自节点的值，将节点重新拼接
+     *
      * T:O(m+n)
      * S:O(1)
      */

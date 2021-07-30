@@ -1,7 +1,9 @@
-package link;
+package link.classic;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import link.ListNode;
 
 /**
  * 判断链表是否有环：

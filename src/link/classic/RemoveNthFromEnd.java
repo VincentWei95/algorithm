@@ -1,4 +1,4 @@
-package link.middle;
+package link.classic;
 
 import link.ListNode;
 

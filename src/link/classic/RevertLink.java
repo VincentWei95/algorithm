@@ -1,4 +1,6 @@
-package link;
+package link.classic;
+
+import link.ListNode;
 
 /**
  * 反转单链表：
@@ -44,20 +46,19 @@ public class RevertLink {
      * null -> 1 -> 2 -> 3 -> 4 -> 5 -> null
      * pre    cur
      *
-     * Link next = current.next;
-     *       next = 2
+     * 1、Link next = current.next;
      * null -> 1 -> 2 -> 3 -> 4 -> 5 -> null
-     * pre    cur
+     * pre    cur（cur.next=2）
      *
-     * current.next = previous;
+     * 2、current.next = previous;
      * null <- 1  2 -> 3 -> 4 -> 5 -> null
      * pre    cur
      *
-     * previous = current;
+     * 3、previous = current;
      * null <- 1  2 -> 3 -> 4 -> 5 -> null
      *        pre
      *
-     * current = next;
+     * 4、current = next;
      * null <- 1  2 -> 3 -> 4 -> 5 -> null
      *        pre cur
      *
