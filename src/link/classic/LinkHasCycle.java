@@ -68,24 +68,4 @@ public class LinkHasCycle {
         }
         return false;
     }
-
-    // 扩展：如果链表有环，返回链表头
-    private ListNode hasCycle(ListNode head) {
-        ListNode dummy = new ListNode(0);
-        ListNode p = dummy;
-
-        boolean isCycle = false;
-        ListNode s = head;
-        ListNode f = head;
-        while (f != null && f.next != null) {
-            f = f.next.next;
-            s = s.next;
-            p.next = s;
-            p = p.next;
-            isCycle = s == f;
-
-            if (isCycle) break;
-        }
-        return isCycle ? dummy.next : null;
-    }
 }
