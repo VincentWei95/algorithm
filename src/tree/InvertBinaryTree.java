@@ -42,6 +42,9 @@ public class InvertBinaryTree {
      */
     private TreeNode invertBinaryTreeRecursive(TreeNode root) {
         if (root == null) return root;
+        // 使用的前序遍历
+        // 前序遍历是先打印自身，再打印左子树，然后打印右子树
+        // 遇到节点就交换左右子节点
         TreeNode tmp = root.left;
         root.left = root.right;
         root.right = tmp;
