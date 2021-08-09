@@ -1,3 +1,5 @@
+package math;
+
 /**
  * 丑数：
  *
