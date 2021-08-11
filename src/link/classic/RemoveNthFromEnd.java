@@ -31,27 +31,27 @@ public class RemoveNthFromEnd {
      * S:O(1)
      */
     private ListNode removeNthFromEnd1(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        int length = getLength(head);
+        dummy.next = head;
+        ListNode cur = dummy;
+        // 移动到待删除节点的前一个位置
+        for (int i = 0; i < length - n; ++i) {
+            cur = cur.next;
+        }
+        // 删除节点
+        cur.next = cur.next.next;
+        return dummy.next;
+    }
+
+    private int getLength(ListNode head) {
+        ListNode cur = head;
         int length = 0;
-        ListNode dummyHead = new ListNode(0);
-        dummyHead.next = head;
-
-        // 获取链表长度
-        ListNode p = head;
-        while (p != null) {
+        while (cur != null) {
             length++;
-            p = p.next;
+            cur = cur.next;
         }
-
-        // 移动到操作的链表节点位置
-        length -= n;
-        p = dummyHead;
-        while (length > 0) {
-            length--;
-            p = p.next;
-        }
-        // 链表节点指向下下个链表节点
-        p.next = p.next.next;
-        return dummyHead.next;
+        return length;
     }
 
     /**
