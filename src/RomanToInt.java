@@ -79,4 +79,36 @@ public class RomanToInt {
         }
         return sum;
     }
+
+    /**
+     * 通常情况下，罗马数字中小的数字在大的数字的右边。若输入的字符串满足该情况，那么可以将每个字符视作一个单独的值，累加每个字符对应的数值即可。
+     *
+     * 例如 XXVII 可视作 X + X + V + I + I = 10 + 10 + 5 + 1 + 1 = 27
+     *
+     * 若存在小的数字在大的数字的左边的情况，根据规则需要减去小的数字。对于这种情况，我们也可以将每个字符视作一个单独的值，若一个数字右侧的数字比它大，则将该数字的符号取反。
+     *
+     * 例如 XIV 可视作 X − I + V = 10 − 1 + 5 = 14
+     */
+    private int romainToInt(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);
+        map.put('V', 5);
+        map.put('X', 10);
+        map.put('L', 50);
+        map.put('C', 100);
+        map.put('D', 500);
+        map.put('M', 1000);
+
+        int sum = 0;
+        int length = s.length();
+        for (int i = 0; i < length; i++) {
+            int value = map.get(s.charAt(i));
+            if (i < length - 1 && value < map.get(s.charAt(i + 1))) {
+                sum -= value;
+            } else {
+                sum += value;
+            }
+        }
+        return sum;
+    }
 }
