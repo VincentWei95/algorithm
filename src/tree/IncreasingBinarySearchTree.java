@@ -94,8 +94,8 @@ public class IncreasingBinarySearchTree {
         if (root == null) return;
 
         inOrder(root.left);
-        cur.left = null;
         cur.right = root;
+        root.left = null;
         cur = root;
         inOrder(root.right);
     }
