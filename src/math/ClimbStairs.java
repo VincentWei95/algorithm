@@ -47,18 +47,28 @@ public class ClimbStairs {
     /**
      * 方式2：循环实现
      *
+     * f(x) = f(x-1) + f(x-2) 表示第 x 级台阶是 x-1 和 x-2 台阶方案的和
+     *
+     * 爬第0级台阶：f(0)=1 只有一种方案
+     * 爬第1级台阶：f(1)=1 只有一种方案
+     * 这两个可以作为边界条件
+     *
+     * f(2)= f(1) + f(0) = 1 + 1 = 2
+     * f(3)= f(2) + f(1) = 2 + 1 = 3
+     * f(4)= f(3) + f(2) = 2 + 3 = 5
+     *
      * T:O(n)
      * S:O(1)
      */
     private int climbStairsInterative(int n) {
-        int first = 1;
-        int second = 1;
+        int first = 1; // f(0)
+        int second = 1; // f(1)
         for (int i = 1; i < n; i++) {
             // 不断将前两项之和相加得到第三项
-            int third = first + second;
+            int third = first + second; // f(2) = f(0) + f(1)
             // 更新前两项的值
-            first = second;
-            second = third;
+            first = second; // first = f(1)
+            second = third; // second = f(2)
         }
 
         // 最后第三项的值给了second，所以返回second
