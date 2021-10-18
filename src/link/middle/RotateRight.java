@@ -30,25 +30,44 @@ import link.ListNode;
 public class RotateRight {
 
     /**
+     * 1、获取到链表长度，然后计算 fast 要走的位置
+     *   1   ->  2  ->  3  ->  4  ->  5
+     * fast
+     *
+     * 2、fast 移动到 n = length % k 位置
+     *   1   ->  2  ->  3  ->  4  ->  5
+     *                fast
+     *
+     * 3、提供 slow，fast继续移动到链尾节点时，slow 也移动到新的链尾节点
+     *   1   ->  2  ->  3  ->  4  ->  5
+     *                slow          fast
+     *
+     * 4、原先的链尾节点的后继节点指向当前头节点 head，fast.next=head
+     *   1   ->  2  ->  3  ->  4  ->  5  ->  1
+     *                slow          fast
+     *
+     * 5、新的头节点为 slow.next，head = slow.next，slow.next 再设置为新的尾节点，slow.next = null
+     *   4  ->  5  ->  1  ->  2  ->  3
+     *  head  fast                 slow
+     *
      * T:O(n)
      * S:O(1)
-     *
-     * 题解：
-     * https://leetcode-cn.com/problems/rotate-list/solution/dong-hua-yan-shi-kuai-man-zhi-zhen-61-xu-7bp0/
      */
     public ListNode rotateRight(ListNode head, int k) {
         if (head == null) return null;
 
-        ListNode fast = head;
-        ListNode slow = head;
-
         int length = getLength(head);
         // 当 k > length 时，走 k % length 步和走 k 步是一样的
-        int step = k % length;
-        for (int i = 0; i < step; i++) {
+        int n = k % length;
+        // n 是链表长度的倍数，直接返回原链表即可
+        if (n == 0) return head;
+
+        ListNode fast = head;
+        for (int i = 0; i < n; i++) {
             fast = fast.next;
         }
 
+        ListNode slow = head;
         // 移动 fast 指针到链尾，此时 slow 会停在倒数第 k 个节点的位置
         while (fast.next != null) {
             fast = fast.next;
