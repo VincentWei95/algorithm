@@ -1,7 +1,7 @@
 package halfsearch;
 
 /**
- * 二分搜索：
+ * 704.二分搜索：
  *
  * 给你一个递增排序的整数数组 nums，和一个目标值 target。你要在数组里找到 target，然后返回它的下标。如果找不到则返回 -1
  *
@@ -23,43 +23,23 @@ public class HalfSearch {
      * T:O(logn)
      * S:O(1)
      */
-    private int halfSearch(int[] arr, int target) {
-        if (arr == null || arr.length <= 0) return -1;
+    private int halfSearch(int[] nums, int target) {
+        // 避免当 target 小于nums[0] nums[nums.length - 1]时多次循环运算
+        if (target < nums[0] || target > nums[nums.length - 1]) {
+            return -1;
+        }
 
-        int min = 0;
-        int max = arr.length - 1;
-        while (min <= max) {
-            int mid = min + (max - min) / 2;
-            if (arr[mid] == target) {
+        int left = 0, right = nums.length - 1;
+        while (left <= right) {
+            int mid = left + ((right - left) >> 1); // 避免溢出
+            if (nums[mid] == target)
                 return mid;
-            } else if (arr[mid] > target) {
-                max = mid - 1;
-            } else if (arr[mid] < target) {
-                min = mid + 1;
-            }
+            else if (nums[mid] < target)
+                left = mid + 1;
+            else if (nums[mid] > target)
+                right = mid - 1;
         }
-
         return -1;
-    }
-
-    private int halfSearch2(int[] arr, int data) {
-        int min = 0;
-        int max = arr.length - 1;
-        int mid = min + (max - min) / 2;
-
-        while (arr[mid] != data) {
-            if (arr[mid] > data) {
-                max = mid - 1;
-            } else if (arr[mid] < data) {
-                min = mid + 1;
-            }
-
-            if (min > max)
-                return -1;
-
-            mid = min + (max - min) / 2;
-        }
-        return mid;
     }
 
     // 递归二分法搜索，时间复杂度：O(logn)

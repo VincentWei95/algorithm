@@ -1,7 +1,7 @@
 package halfsearch;
 
 /**
- * 二分搜索插入位置：
+ * 35.二分搜索插入位置：
  *
  * 给你一个递增排序的整数数组 nums，和一个目标值 target。你要在数组里找到 target，然后返回它的下标。
  * 如果找不到，则返回目标值应该插入的位置的下标，要求插入目标值后，数组仍然保持有序
@@ -14,6 +14,11 @@ public class HalfSearchInsertPosition {
         System.out.println(main.halfSearchInsertPosition(arr, 5));
     }
 
+    /**
+     *
+     * T:O(logn)
+     * S:O(1)
+     */
     private int halfSearchInsertPosition(int[] arr, int target) {
         if (arr == null || arr.length <= 0) return -1;
 

@@ -1,72 +1,170 @@
 package string;
 
 /**
- * 实现StrStr：
  *
- * 你要实现 C 语言里面的 strstr 函数，这个函数接收两个字符串，你要找到第二个字符串在第一个字符串中的开始下标，如果找不到则返回 -1
+ * 28.实现strStr
  *
- * 比如说，给你的两个字符串分别是：
+ * 给你两个字符串haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串出现的第一个位置（下标从 0 开始）。如果不存在，则返回 -1 。
  *
- * marvel studio 和 studio
+ * 说明：
  *
- * 第二个字符串存在于第一个字符串中，于是你要返回它在第一个字符串中的开始下标 7
+ * 当needle是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。
  *
- * 再比如说给你的字符串是：
+ * 对于本题而言，当needle是空字符串时我们应当返回 0 。这与 C 语言的strstr()以及 Java 的indexOf()定义相符。
  *
- * doctor strange 和 master
+ * 示例 1：
  *
- * 第二个字符串没有在第一个字符串中出现，因此返回 -1
+ * 输入：haystack = "hello", needle = "ll"
+ * 输出：2
+ *
+ * 示例 2：
+ *
+ * 输入：haystack = "aaaaa", needle = "bba"
+ * 输出：-1
+ *
+ * 示例 3：
+ *
+ * 输入：haystack = "", needle = ""
+ * 输出：0
+
+ * 提示：
+ *
+ * haystack 和 needle 仅由小写英文字符组成
  */
 public class StrStr {
 
-    public static void main(String[] args) {
-        StrStr main = new StrStr();
-        System.out.println(main.strstr("marvel studio", "studio"));
-    }
-
     /**
-     * 标准实现
+     * 该题目是经典的kmp算法
      *
-     * 遍历字符串找到和需要的字符串首字符相同的字符，然后开始再循环往后的字符直到对比完所需字符串是否完全相同
-     * 如果是则返回外层循环的索引位置，否则返回-1
+     * 前缀表会记录字符相同的最长连续子串的长度，当字符不匹配时回退到上一个不连续的字符位置，而不需要重新从头开始匹配
      *
-     * T:O((n-m+1)*m)
-     * S:O(1)
+     * 1、
+     *     0
+     * s = a  a  b  a  a  f
+     *        i
+     *     j
+     *
+     * i = 1, j = 0
+     * s[i] == s[j], j = j++ = 1, next[i] = next[1] = 1
+     *
+     *     0  1
+     * s = a  a  b  a  a  f
+     *        i
+     *     j
+     *
+     * 2、
+     *     0  1
+     * s = a  a  b  a  a  f
+     *           i
+     *        j
+     *
+     * i = 2, j = 1
+     * s[i] != s[j], j = next[j - 1] = next[0] = 0
+     *
+     *     0  1
+     * s = a  a  b  a  a  f
+     *           i
+     *     j
+     *
+     * i = 2, j = 0
+     * s[i] != s[j], next[i] = next[2] = 0
+     *
+     *     0  1  0
+     * s = a  a  b  a  a  f
+     *           i
+     *     j
+     *
+     * 3、
+     *     0  1  0
+     * s = a  a  b  a  a  f
+     *              i
+     *     j
+     *
+     * i = 3, j = 0
+     * s[i] == s[j], j = j++ = 1, next[i] = next[3] = 1
+     *
+     *     0  1  0  1
+     * s = a  a  b  a  a  f
+     *              i
+     *        j
+     *
+     * 4、
+     *     0  1  0  1
+     * s = a  a  b  a  a  f
+     *                 i
+     *        j
+     *
+     * i = 4, j = 1
+     * s[i] == s[j], j = j++ = 2, next[i] = next[4] = 2
+     *
+     *     0  1  0  1  2
+     * s = a  a  b  a  a  f
+     *                 i
+     *           j
+     *
+     * 5、
+     *     0  1  0  1  2
+     * s = a  a  b  a  a  f
+     *                    i
+     *           j
+     *
+     * i = 5, j = 2
+     * s[i] != s[j], j = next[j - 1] = next[1] = 1
+     *
+     *     0  1  0  1  2
+     * s = a  a  b  a  a  f
+     *                    i
+     *        j
+     *
+     * i = 5, j = 1
+     * s[i] != s[j], j = next[j - 1] = next[0] = 0
+     *
+     *     0  1  0  1  2  0
+     * s = a  a  b  a  a  f
+     *                    i
+     *     j
+     *
+     * 最终前缀表为 next[0, 1, 0, 1, 2, 0]
+     *
+     * T:O(m+n):m 是 haystack 的长度，n 是 needle 的长度
+     * S:O(n):n 是 needle 的长度，获取前缀表
+     *
+     * kmp的理解：https://gitee.com/programmercarl/leetcode-master/blob/master/problems/0028.%E5%AE%9E%E7%8E%B0strStr.md
      */
-    private int strstr(String haystack, String needle) {
-        if (haystack == null || needle == null) return -1;
-        if (needle.length() == 0) return 0;
-        int n = haystack.length();
-        int m = needle.length();
+    public int strStr(String haystack, String needle) {
+        int m = haystack.length();
+        int n = needle.length();
+        if (m == 0 && n == 0) return 0;
+        if (m == 0) return -1;
+        if (n == 0) return 0;
 
-        for (int i = 0; i <= n - m; i++) {
-            int j = 0; // 内层循环遍历needle的索引位置
-            int k = i; // 外层循环找到haystack和needle开始字符相同的索引位置
-            // 外层找到和needle开始字符相同的字符，开启循环遍历haystack往后的字符是否和needle相同
-            for (; j < m && k < n && needle.charAt(j) == haystack.charAt(k); j++, k++);
-            // 能遍历完needle字符串说明找到，直接返回起始索引位置
-            if (j == needle.length()) return i;
-        }
-        return -1;
-    }
-
-    /**
-     * 个人思路实现
-     */
-    private int strstr2(String haystack, String needle) {
-        if (haystack == null || needle == null) return -1;
-        if (needle.length() == 0) return 0;
-
-        char needleBeginChar = needle.charAt(0);
-        for (int i = 0; i < haystack.length(); i++) {
-            char haystackChar = haystack.charAt(i);
-            boolean find = false;
-            if (haystackChar == needleBeginChar) {
-                for (int j = 0; j < needle.length(); j++) {
-                    find = haystack.charAt(i + j) == needle.charAt(j);
-                }
+        // 先获取前缀表记录
+        int[] next = new int[n];
+        for (int i = 1, j = 0; i < n; i++) {
+            // 如果字符不同，回退到上一个不连续的子串位置
+            while (j > 0 && needle.charAt(i) != needle.charAt(j)) {
+                j = next[j - 1];
             }
-            if (find) return i;
+            // 如果字符相同，+1
+            if (needle.charAt(i) == needle.charAt(j)) {
+                j++;
+            }
+            next[i] = j; // 前缀表记录出现的最长相同前缀长度
+        }
+
+        for (int i = 0, j = 0; i < m; i++) {
+            // 对比字符，如果不相同前缀表回退到上一个不连续的子串位置
+            while (j > 0 && haystack.charAt(i) != needle.charAt(j)) {
+                j = next[j - 1];
+            }
+
+            if (haystack.charAt(i) == needle.charAt(j)) {
+                j++;
+            }
+            // 已经走完模式串的长度，说明找到了返回开始索引
+            if (j == n) {
+                return i - n + 1;
+            }
         }
         return -1;
     }
