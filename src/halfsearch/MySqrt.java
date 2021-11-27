@@ -24,7 +24,7 @@ public class MySqrt {
     /**
      * 平方根的概念：
      *
-     * 如果一个非负数k的平方等于x，即k2=x(x >= 0)，那么这个非负数k叫做x的算数平方根
+     * 如果一个非负数k的平方等于x，即k^2=x(x >= 0)，那么这个非负数k叫做x的算数平方根
      * x的算数平方根记为根号x，x叫做被开平方数，求一个非负数x的平方根的运算叫做开平方
      *
      * 0的算数平方根为0
@@ -47,7 +47,7 @@ public class MySqrt {
         int k = -1;
         while (left <= right) {
             int mid = left + (right - left) / 2;
-            if ((long) mid * mid <= x) { // 模拟 k2 = x
+            if ((long) mid * mid <= x) { // 模拟 k^2 = x
                 left = mid + 1;
                 k = mid;
             } else {
