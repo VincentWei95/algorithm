@@ -85,4 +85,18 @@ public class RemoveDuplicates {
         }
         return slow;
     }
+
+    public int removeDumplicates2(int[] nums) {
+        if (nums == null || nums.length == 0) return 0;
+        if (nums.length == 1) return 1;
+
+        int slow = 0;
+        for (int fast = 0; fast < nums.length; fast++) {
+            if (nums[slow] != nums[fast]) {
+                slow++; // 要先往前走一步，然后才开始交换
+                nums[slow] = nums[fast];
+            }
+        }
+        return slow + 1;
+    }
 }
