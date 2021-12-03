@@ -131,16 +131,13 @@ public class StrStr {
      *
      * kmp的理解：https://gitee.com/programmercarl/leetcode-master/blob/master/problems/0028.%E5%AE%9E%E7%8E%B0strStr.md
      */
+    // 前缀表不减1实现方式
     public int strStr(String haystack, String needle) {
-        int m = haystack.length();
-        int n = needle.length();
-        if (m == 0 && n == 0) return 0;
-        if (m == 0) return -1;
-        if (n == 0) return 0;
+        if (needle.length() == 0) return 0;
 
         // 先获取前缀表记录
-        int[] next = new int[n];
-        for (int i = 1, j = 0; i < n; i++) {
+        int[] next = new int[needle.length()];
+        for (int i = 1, j = 0; i < needle.length(); i++) {
             // 如果字符不同，回退到上一个不连续的子串位置
             while (j > 0 && needle.charAt(i) != needle.charAt(j)) {
                 j = next[j - 1];
@@ -152,7 +149,7 @@ public class StrStr {
             next[i] = j; // 前缀表记录出现的最长相同前缀长度
         }
 
-        for (int i = 0, j = 0; i < m; i++) {
+        for (int i = 0, j = 0; i < haystack.length(); i++) {
             // 对比字符，如果不相同前缀表回退到上一个不连续的子串位置
             while (j > 0 && haystack.charAt(i) != needle.charAt(j)) {
                 j = next[j - 1];
@@ -162,8 +159,38 @@ public class StrStr {
                 j++;
             }
             // 已经走完模式串的长度，说明找到了返回开始索引
-            if (j == n) {
-                return i - n + 1;
+            if (j == needle.length()) {
+                return i - needle.length() + 1;
+            }
+        }
+        return -1;
+    }
+
+    // 前缀表减1实现方式
+    public int strStr2(String haystack, String needle) {
+        if (needle.length() == 0) return 0;
+
+        int[] next = new int[needle.length()];
+        next[0] = -1;
+        for (int i = 1, j = -1; i < needle.length(); i++) {
+            while (j >= 0 && needle.charAt(i) != needle.charAt(j + 1)) {
+                j = next[j];
+            }
+            if (needle.charAt(i) == needle.charAt(j + 1)) {
+                j++;
+            }
+            next[i] = j;
+        }
+
+        for (int i = 0, j = -1; i < haystack.length(); i++) {
+            while (j >= 0 && haystack.charAt(i) != needle.charAt(j + 1)) {
+                j = next[j];
+            }
+            if (haystack.charAt(i) == needle.charAt(j + 1)) {
+                j++;
+            }
+            if (j == needle.length() - 1) {
+                return i - needle.length() + 1;
             }
         }
         return -1;
