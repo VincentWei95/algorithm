@@ -29,6 +29,47 @@ public class SwapPairs {
      * node1.next = node2.next;
      * node2.next = node1;
      *
+     * 上面的节点指向是需要根据题目推导的。例如，按题目第一次需要实现的目的是交换 2 和 1：
+     *
+     *                   ->
+     * dummyHead  ->  1  <-  2  ->  3  ->  4
+     *
+     * 但交换这两个节点就涉及到节点 1 的前一个节点指针指向和节点 2 下一个节点指针指向，即影响了 dummyHead 和 节点 3
+     * 所以在交换时需要考虑这两个节点。那怎么交换呢？
+     *
+     * 当节点 2 指向 节点1 时，需要做的还有两步：
+     * 1、节点 1 指向 节点 3 形成 2 -> 1 -> 3 -> 4
+     * 2、dummyHead 指向新的头节点即 节点2 形成 dummyHead -> 2 -> 1 -> 3 -> 4
+     *
+     * 剩下的就是什么时候交换哪个节点。
+     *
+     *  dummyHead ->  1  ->  2  ->  3  -> 4
+     *     temp     node1  node2
+     *
+     *
+     * 1、步骤1：dummyHead -> 节点2
+     *
+     * dummyHead  ->  2  ->  3  ->  4
+     *
+     * dummyHead      1  ->  2  ->  3  -> 4
+     *
+     * 2、步骤2：节点1 指向节点 3
+     *
+     * 1   ->   3  ->  4
+     *
+     * dummyHead     1      2   ->  3  ->  4
+     *
+     * 3、步骤3：节点2 指向 节点1
+     *
+     * dummyHead  ->  2  ->  1  ->  3  ->  4
+     *   temp       node2  node1
+     *
+     * 所以有如下指针指向：
+     *
+     * temp.next = node2;
+     * node1.next = node2.next;
+     * node2.next = node1;
+     *
      * T:O(n)
      * S:O(1)
      */

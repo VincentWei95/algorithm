@@ -89,8 +89,8 @@ public class SpiralOrder {
      *
      *  1、从左到右：x 坐标变化，y 坐标不变，即 x 坐标 left -> right，y = top， matrix[top][left->right]
      *  2、从上到下：x 坐标不变，y 坐标变化，即 y 坐标 top+1 -> bottom，x = right，matrix[top+1->bottom][right]
-     *  3、从右到左：x 坐标变化，y 坐标不变，即 x 坐标 right-1 -> left，y = bottom，matrix[bottom][right-1->left]
-     *  4、从下到上：x 坐标不变，y 坐标变化，即 y 坐标 bottom -> top, x = left，matrix[bottom->top][left]
+     *  3、从右到左：x 坐标变化，y 坐标不变，即 x 坐标 right-1 -> left - 1，y = bottom，matrix[bottom][right-1->left - 1]
+     *  4、从下到上：x 坐标不变，y 坐标变化，即 y 坐标 bottom -> top - 1, x = left，matrix[bottom->top - 1][left]
      *
      * T:O(mn)，m和n分别为矩阵的行和列数，矩阵中每个元素都会被访问一遍
      * S:P(1)
