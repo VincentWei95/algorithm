@@ -1,9 +1,0 @@
-在算法题中如果有提醒：字符串中仅包含小写字母，就可以尝试使用数组作为哈希表存储字符：
-
-int[] map = new int[26];
-for (char c : str.toCharArray()) {
-    map[c - 'a']++; // 存储字符出现的次数
-}
-
-1、字符转索引：int index = c - 'a'，对应数组索引 0 - 26
-2、索引转字符：char c = (char) (i + 'a')，对应ASCII表的小写字母字符 a - z
