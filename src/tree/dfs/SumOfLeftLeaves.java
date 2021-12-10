@@ -43,6 +43,7 @@ public class SumOfLeftLeaves {
         if (root.left != null && root.left.left == null && root.left.right == null) {
             leaveValue = root.left.val;
         }
+        // 当前左叶子的值+左子树的左叶子之和+右子树的左叶子之和
         return leaveValue + leftTreeValue + rightTreeValue;
     }
 }
