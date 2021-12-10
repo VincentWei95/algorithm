@@ -50,18 +50,18 @@ public class BuildTree {
     private TreeNode traversal(int[] inorder, int inLeft, int inRight,
                                int[] postorder, int postLeft, int postRight) {
         // 空节点
-        if (inRight - inLeft < 1) {
+        if (postRight == postLeft) {
             return null;
-        }
-
-        // 叶子节点
-        if (inRight - inLeft == 1) {
-            return new TreeNode(inorder[inLeft]);
         }
 
         // 从后序数组中拿到二叉树根节点
         int rootVal = postorder[postRight - 1];
         TreeNode root = new TreeNode(rootVal);
+
+        // 叶子节点
+        if (postRight - postLeft == 1) {
+            return root;
+        }
 
         // 找到中序数组的切割点位置
         int rootIndex = 0;
@@ -81,10 +81,10 @@ public class BuildTree {
         // 切割后序数组左区间和右区间，中序数组和后序数组大小相同
         // rootIndex - inLeft 是中序左数组的长度[0, rootIndex)
         int postorderLeftBeginIndex = postLeft;
-        int postorderLeftEndIndex = postLeft + (rootIndex - inLeft);
+        int postorderLeftEndIndex = postLeft + (rootIndex - inLeft); // 终止位置需要加上中序区间的大小(rootIndex - inLeft)
         // rootIndex - inLeft 是中序右数组的长度[rootIndex + 1, end)
         int postorderRightBeginIndex = postLeft + (rootIndex - inLeft);
-        int postorderRightEndIndex = postRight - 1; // 最后一个元素已经作为二叉树根节点要去除
+        int postorderRightEndIndex = postRight - 1; // -1是因为最后一个元素已经作为二叉树根节点要去除
 
         root.left = traversal(inorder, inorderLeftBeginIndex, inorderLeftEndIndex,
                 postorder, postorderLeftBeginIndex, postorderLeftEndIndex);
@@ -105,16 +105,16 @@ public class BuildTree {
 
     private TreeNode traversal2(int[] preorder, int preLeft, int preRight,
                                int[] inorder, int inLeft, int inRight) {
-        if (inRight - inLeft < 1) {
+        if (preLeft == preRight) {
             return null;
-        }
-
-        if (inRight - inLeft == 1) {
-            return new TreeNode(inorder[inLeft]);
         }
 
         int rootVal = preorder[preLeft];
         TreeNode root = new TreeNode(rootVal);
+
+        if (preRight - preLeft == 1) {
+            return root;
+        }
 
         int rootIndex = 0;
         for (int i = inLeft; i < inRight; i++) {
@@ -129,7 +129,7 @@ public class BuildTree {
         int inorderRightBeginIndex = rootIndex + 1;
         int inorderRightEndIndex = inRight;
 
-        int preorderLeftBeginIndex = preLeft + 1;
+        int preorderLeftBeginIndex = preLeft + 1; // +1是因为第一个元素已经作为二叉树根节点要去除
         int preorderLeftEndIndex = preLeft + 1 + (rootIndex - inLeft);
         int preorderRightBeginIndex = preLeft + 1 + (rootIndex - inLeft);
         int preorderRightEndIndex = preRight;
