@@ -46,6 +46,15 @@ public class LetterCombinations {
      *          / \ \    / \ \     / \ \
      *         ad ae af bd be bf  cd ce cf
      *
+     * 首先需要思考的问题是？怎么把数字映射为字母？直接思考 digits = "23" 可能想不明白
+     * 换个角度，如果 digits = "abcdef"，获取字母组合，很容易就能联想到：
+     * for (int i = 0; i < "abc".length(); i++) {
+     *     for (int j = 0; j < "def".length(); j++) {
+     *
+     *     }
+     * }
+     * 回溯时最终是要使用的字符数组遍历，数字映射字符串使用 map
+     *
      * 1、确定递归函数参数和返回值
      * 参数 List<String> result 存放结果集
      * 参数 StringBuilder 记录每个节点
