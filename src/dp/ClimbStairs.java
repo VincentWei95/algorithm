@@ -28,67 +28,45 @@ package dp;
  */
 public class ClimbStairs {
 
-    public static void main(String[] args) {
-
-    }
-
     /**
-     * 分析：
+     * 1、确定 dp 数组及下标 i 的含义
+     * dp[i]：爬到第 i 层楼梯，有 dp[i] 种方法
      *
-     * n     f
-     * 0     1
-     * 1     1
-     * 2     2
+     * 2、确定递推公式
+     * 从 dp[i] 的定义可以看出，dp[i] 可以有两个方向推导出来
+     * 上 i-1 层楼梯，有 dp[i-1] 种方法，再一步跳一个台阶到第 i 层就是 dp[i]
+     * 上 i-2 层楼梯，有 dp[i-1] 种方法，再一步跳两个台阶到第 i 层就是 dp[i]
+     * 那么 dp[i] 就是 dp[i-1] 与 dp[i-2] 之和，dp[i] = dp[i-1] + dp[i-2]
      *
-     * 当楼梯n有0阶时，只有一种爬楼梯的方式；
-     * 当楼梯n有1阶时，只有一种爬楼梯的方式；
-     * 当楼梯n有2阶时，有两种爬楼梯的方式：一步一阶，两步两阶
+     * 3、确定 dp 数组初始化
+     * 上面说到 dp[i] 的含义，i 表示的到达的楼梯层数，dp[i] 表示爬到第 i 层楼梯的方法数
+     * 那么 i=0 时，dp[i] 应该是多少？爬第 0 层从 dp 数组的定义角度上 dp[0]=0 是说得通的，但是题目中有提及：n 是一个正整数，题目根本没说 n 有为 0 的情况
+     * 所以本题就不应该讨论 dp[0] 的初始化！
+     * 所以不考虑 dp[0] 初始化的情况，dp[1]=1，dp[2]=2，然后从 i=3 开始递推，这样才符合 dp[i] 的定义
      *
-     * 实质上这道题是要求解斐波那契：
+     * 4、确定遍历顺序
+     * 从递推公式 dp[i] = dp[i-1] + dp[i-2] 可以看出，遍历顺序是从前到后遍历
      *
-     * f(n) = f(n-1) + f(n-2)
-     * 或
-     * f(n) = 1, n < 2
-     */
-
-    /**
-     * 方式1：递归实现（仅作参考，时间复杂度太大）
+     * 6、举例推导 dp 数组
+     * 当 n=5 时，dp 数组如下：
+     * 下标：  1  2  3  4  5
+     * dp[i]：1  2  3  5  8
+     * 如果代码出问题了，就把 dp 数组打印出来看是不是和自己推导的一样
      *
-     * T:O(2的n次方）
-     */
-    private int climbStairsRecursive(int n) {
-        if (n < 2) return 1;
-        return climbStairsRecursive(n-1) + climbStairsRecursive(n-2);
-    }
-
-    /**
-     * 方式2：循环实现
-     *
-     * f(x) = f(x-1) + f(x-2) 表示第 x 级台阶是 x-1 和 x-2 台阶方案的和
-     *
-     * 爬第0级台阶：f(0)=1 只有一种方案
-     * 爬第1级台阶：f(1)=1 只有一种方案
-     * 这两个可以作为边界条件
-     *
-     * f(2)= f(1) + f(0) = 1 + 1 = 2
-     * f(3)= f(2) + f(1) = 2 + 1 = 3
-     * f(4)= f(3) + f(2) = 2 + 3 = 5
+     * 可以发现，这道题目就是斐波那契数{@link Fib}，唯一区别是没有讨论 dp[0] 的情况，因为没有意义
      *
      * T:O(n)
-     * S:O(1)
+     * S:O(n)
      */
-    private int climbStairsInterative(int n) {
-        int first = 1; // f(0)
-        int second = 1; // f(1)
-        for (int i = 1; i < n; i++) {
-            // 不断将前两项之和相加得到第三项
-            int third = first + second; // f(2) = f(0) + f(1)
-            // 更新前两项的值
-            first = second; // first = f(1)
-            second = third; // second = f(2)
-        }
+    public int climbStairs(int n) {
+        if (n <= 1) return n;
 
-        // 最后第三项的值给了second，所以返回second
-        return second;
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+        return dp[n];
     }
 }
